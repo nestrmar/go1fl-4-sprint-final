@@ -93,7 +93,7 @@ steps, activity, duration, err := parseTraining(data)
  }
 
  result := fmt.Sprintf(
-  "Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f"\n,
+  "Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f"\n",
   activity,
   duration.Hours(),
   dist,
