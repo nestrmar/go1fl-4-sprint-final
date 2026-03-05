@@ -62,8 +62,12 @@ func DayActionInfo(data string, weight, height float64) string {
  // дистанция в километрах
  distanceKm := distanceMeters / mInKm
 
- // потраченные калории
- calories := spentcalories.WalkingSpentCalories(steps, weight, height, duration)
+// потраченные калории с обработкой ошибки
+    calories, err := spentcalories.WalkingSpentCalories(steps, weight, height, duration)
+    if err != nil {
+        fmt.Println("Ошибка при расчёте калорий:", err)
+        calories = 0 // если ошибка, ставим 0 калорий
+}
 
  // формируем строку результата
  result := fmt.Sprintf(
