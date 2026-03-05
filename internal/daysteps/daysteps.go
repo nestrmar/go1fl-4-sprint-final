@@ -6,6 +6,7 @@ import (
 	"strconv"
 	"errors"
 	"strings"
+        "log"
 	"time"
 )
 
@@ -51,17 +52,23 @@ func DayActionInfo(data string, weight, height float64) string {
 // получаем шаги и время
  steps, duration, err := parsePackage(data)
  if err != nil {
-  return ""
+msg := fmt.Sprintf("Некорректный формат данных")  
+log.Println(msg)
+return msg
  }
 
  // проверка шагов
- if steps <= 0 {
-  return ""
+ if steps <= 0 || err != nil {
+msg := fmt.Sprintf("Некорректный формат данных")
+log.Println(msg)
+return msg
  }
 
 // проверка продолжительности
- if duration <= 0 {
-  return ""
+ if duration <= 0 || err != nil {
+msg := fmt.Sprintf("Некорректный формат данных")
+log.Println(msg)
+return msg
  }
 
  // дистанция в метрах
@@ -72,8 +79,10 @@ func DayActionInfo(data string, weight, height float64) string {
 
 // потраченные калории с обработкой ошибки
     calories, err := spentcalories.WalkingSpentCalories(steps, weight, height, duration)
-    if err != nil {
-        return ""
+    if err <= nil || err != nil {
+msg := fmt.Sprintf("Некорректный формат данных")
+log.Println(msg)
+return msg
 }
 
  // формируем строку результата
