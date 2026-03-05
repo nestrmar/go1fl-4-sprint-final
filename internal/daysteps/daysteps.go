@@ -51,19 +51,16 @@ func DayActionInfo(data string, weight, height float64) string {
 // получаем шаги и время
  steps, duration, err := parsePackage(data)
  if err != nil {
-  fmt.Println("Некорректный формат данных:", err)
   return ""
  }
 
  // проверка шагов
  if steps <= 0 {
-  fmt.Println("Шаги <=0, пропускаем запись")
   return ""
  }
 
 // проверка продолжительности
  if duration <= 0 {
-  fmt.Println("Продолжительность <=0, пропускаем запись")
   return ""
  }
 
@@ -76,7 +73,6 @@ func DayActionInfo(data string, weight, height float64) string {
 // потраченные калории с обработкой ошибки
     calories, err := spentcalories.WalkingSpentCalories(steps, weight, height, duration)
     if err != nil {
-        fmt.Println("Ошибка при расчёте калорий:", err)
         return ""
 }
 
