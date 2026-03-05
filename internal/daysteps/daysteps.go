@@ -79,7 +79,7 @@ return msg
 
 // потраченные калории с обработкой ошибки
     calories, err := spentcalories.WalkingSpentCalories(steps, weight, height, duration)
-    if err <= nil || err != nil {
+    if calories <= 0 || err != nil {
 msg := fmt.Sprintf("Некорректный формат данных")
 log.Println(msg)
 return msg
