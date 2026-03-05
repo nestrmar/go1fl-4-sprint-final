@@ -38,6 +38,10 @@ parts := strings.Split(data, ",")
 		return 0, 0, err
 	}
 
+        if duration <= 0 {
+                return 0, 0, errors.New("неверная продолжительность")
+        }
+
 	return steps, duration, nil
 
 }
@@ -47,12 +51,19 @@ func DayActionInfo(data string, weight, height float64) string {
 // получаем шаги и время
  steps, duration, err := parsePackage(data)
  if err != nil {
-  fmt.Println(err)
+  fmt.Println("Некорректный формат данных:", err)
   return ""
  }
 
  // проверка шагов
  if steps <= 0 {
+  fmt.Println("Шаги <=0, пропускаем запись")
+  return ""
+ }
+
+// проверка продолжительности
+ if duration <= 0 {
+  fmt.Println("Продолжительность <=0, пропускаем запись")
   return ""
  }
 
@@ -66,12 +77,12 @@ func DayActionInfo(data string, weight, height float64) string {
     calories, err := spentcalories.WalkingSpentCalories(steps, weight, height, duration)
     if err != nil {
         fmt.Println("Ошибка при расчёте калорий:", err)
-        calories = 0 // если ошибка, ставим 0 калорий
+        return ""
 }
 
  // формируем строку результата
  result := fmt.Sprintf(
-  "Количество шагов: %d.\nДистанция составила %.2f км.\nВы сожгли %.2f ккал.",
+  "Количество шагов: %d.\nДистанция составила %.2f км.\nВы сожгли %.2f ккал.\n",
   steps,
   distanceKm,
   calories,
