@@ -27,15 +27,15 @@ parts := strings.Split(data, ",")
  }
 
  steps, err := strconv.Atoi(parts[0])
- if err != nil {
-  return 0, "", 0, err
+ if err != nil || steps <= 0 {
+  return 0, "", 0, errors.New("invalid steps")
  }
 
  activity := parts[1]
 
  duration, err := time.ParseDuration(parts[2])
- if err != nil {
-  return 0, "", 0, err
+ if err != nil || duration <= 0 {
+  return 0, "", 0, errors.New("invalid duration")
  }
 
  return steps, activity, duration, nil
@@ -93,7 +93,7 @@ steps, activity, duration, err := parseTraining(data)
  }
 
  result := fmt.Sprintf(
-  "Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f",
+  "Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f"\n,
   activity,
   duration.Hours(),
   dist,
