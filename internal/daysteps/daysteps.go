@@ -1,6 +1,8 @@
 package daysteps
 
 import (
+        "spentcalories"
+        "fmt"
 	"strconv"
 	"errors"
 	"strings"

@@ -102,7 +102,7 @@ steps, activity, duration, err := parseTraining(data)
  )
 
  return result, nil
-{
+}
 
 func RunningSpentCalories(steps int, weight, height float64, duration time.Duration) (float64, error) {
 	// TODO: реализовать функцию
